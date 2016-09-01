@@ -1,45 +1,137 @@
-int startx = 500;
-int starty = 250;
-int endx = 490;
-int endy = 250;
-int red = (int)((Math.random()*51)+205);
-int green = (int)((Math.random()*51)+205);
-int blue = (int)(Math.random()*100);
+int startx1 = 50;
+int starty1 = 250;
+int endx1 = 60;
+int endy1 = 250;
+int red1 = (int)((Math.random()*81)+175);
+int green1 = (int)(Math.random()*42);
+int blue1 = (int)(Math.random()*42);
+
+int startx2 = 450;
+int starty2 = 250;
+int endx2 = 440;
+int endy2 = 250;
+int red2 = (int)((Math.random()*71)+185);
+int green2 = (int)((Math.random()*71)+185);
+int blue2 = (int)(Math.random()*71);
+
+int health1 = 10;
+int health2 = 10;
+
+int leftWizHit = 1
+int rightWizHit = 1
 
 void setup()
 {
   size(500,500);
-  strokeWeight(3);
-  background(0,0,255);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+  strokeWeight(5);
+  background(100,149,237);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 }
 void draw()
 {
-	stroke(red,green,blue);
-	while(endx>0)
+	leftWiz();
+	rightWiz();
+	if (mousePressed && (mouseButton==LEFT))
 	{
-		endx = startx - (int)(Math.random()*10);
-		endy = starty + (int)((Math.random()*19)-9);
-		line(startx,starty,endx,endy);
-		startx=endx;
-		starty=endy;
+		leftWizBolt();
 	}
+	if (mousePressed && (mouseButton==RIGHT))
+	{
+		rightWizBolt();
+	}
+	health();
+}
+void leftWiz()
+{
+	fill(178,34,34);
+	ellipse(50,250,50,50);
+}
+void rightWiz()
+{
+	fill(255,215,0);
+	ellipse(450,250,50,50);
+}
 
+void leftWizBolt()
+{
+	stroke(red1,green1,blue1);
+	while(endx1<500)
+	{
+		endx1 = startx1 + (int)(Math.random()*10);
+		endy1 = starty1 + (int)((Math.random()*19)-9);
+		line(startx1,starty1,endx1,endy1);
+		startx1=endx1;
+		starty1=endy1;
+	}
+}
+void rightWizBolt()
+{
+	stroke(red2,green2,blue2);
+	while(endx2>0)
+	{
+		endx2 = startx2 - (int)(Math.random()*10);
+		endy2 = starty2 + (int)((Math.random()*19)-9);
+		line(startx2,starty2,endx2,endy2);
+		startx2=endx2;
+		starty2=endy2;
+	}
 }
 void mousePressed()
-{
-	startx = 500;
-	starty = 250;
-	endx = 490;
-	endy = 250;
-	red = (int)((Math.random()*71)+185);
-	green = (int)((Math.random()*71)+185);
+{	
+	startx1 = 50;
+	starty1 = 250;
+	endx1 = 60;
+	endy1 = 250;
 	if (Math.random()<0.5)
 	{
-		blue = (int)(Math.random()*51);
+		red1 = (int)((Math.random()*91)+165);
 	} else {
-		blue = (int)((Math.random()*51)+205);
+		red1 = (int)(Math.random()*51);
 	}
-	
+	green1 = (int)(Math.random()*41);
+	blue1 = (int)(Math.random()*41);
+
+	startx2 = 450;
+	starty2 = 250;
+	endx2 = 440;
+	endy2 = 250;
+	red2 = (int)((Math.random()*71)+185);
+	green2 = (int)((Math.random()*71)+185);
+	if (Math.random()<0.5)
+	{
+		blue2 = (int)((Math.random()*21)+80);
+	} else {
+		blue2 = (int)((Math.random()*21)+235);
+	}
 	redraw();
 }
-
+void health()
+{
+	textSize(40);
+	textAlign(CENTER);
+	fill(80,0,0);
+	text(health1,50,350);
+	fill(255,255,170);
+	text(health2,450,350);
+	if((endy2>100) && (endy2<400) && (endx2<=0))
+	{
+		leftWizHit = 0;
+	}
+	if((endy1>100) && (endy1<400) && (endy1>=500))
+	{
+		rightWizHit = 0;
+	}
+	if(leftWizHit==0)
+	{
+		health1 = health1 - 1;
+		leftWizHit = 1;
+	}
+	if(rightWizHit==0)
+	{
+		health2 = health2 - 1;
+		rightWizHit = 1;
+	}
+}
+void mouseReleased()
+{
+	background(100,149,237);
+}
