@@ -39,6 +39,7 @@ void draw()
 		rightWizBolt();
 	}
 	health();
+	gameOver();
 }
 void leftWiz()
 {
@@ -131,6 +132,23 @@ void health()
 		health2 = health2 - 1;
 		rightWizHit = 1;
 		endx2 = 420;
+	}
+}
+void gameOver()
+{
+	if(health1==0)
+	{
+		background(0);
+		textAlign(CENTER);
+		fill(255);
+		text("Right wins!",250,250);
+	}
+	if(health2==0)
+	{
+		background(0);
+		textAlign(CENTER);
+		fill(255);
+		text("Left wins!",250,250);
 	}
 }
 void mouseReleased()
