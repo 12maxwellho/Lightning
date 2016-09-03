@@ -20,6 +20,9 @@ int health2 = 10;
 int leftWizHit = 1;
 int rightWizHit = 1;
 
+int x = 401;
+int y = 400;
+
 void setup()
 {
   size(500,500);
@@ -43,11 +46,13 @@ void draw()
 }
 void leftWiz()
 {
+	stroke(red1,green1,blue1);
 	fill(178,34,34);
 	ellipse(50,250,50,50);
 }
 void rightWiz()
 {
+	stroke(red2,green2,blue2);
 	fill(255,215,0);
 	ellipse(450,250,50,50);
 }
@@ -142,6 +147,8 @@ void gameOver()
 		textAlign(CENTER);
 		fill(255);
 		text("Right wins!",250,250);
+		health1 = 10;
+		health2 = 10;
 	}
 	if(health2==0)
 	{
@@ -149,6 +156,8 @@ void gameOver()
 		textAlign(CENTER);
 		fill(255);
 		text("Left wins!",250,250);
+		health1 = 10;
+		health2 = 10;
 	}
 }
 void mouseReleased()
