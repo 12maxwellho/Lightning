@@ -42,15 +42,15 @@ void draw()
 		textAlign(CENTER);
 		fill(0);
 		textSize(40);
-		text("Nice!",250,350);
+		text("Nice!",250,375);
 	} else if (mousePressed && (mouseButton==LEFT)) {
 		leftWizBolt();
 	} else if (mousePressed && (mouseButton==RIGHT) && (x>235) && (x<265)) {
 		accRightWizBolt();
 		textAlign(CENTER);
-		fill(0);
+		fill(127);
 		textSize(40);
-		text("Nice!",250,350);
+		text("Nice!",250,375);
 	} else if (mousePressed && (mouseButton==RIGHT)) {
 		rightWizBolt();
 	}
@@ -180,7 +180,7 @@ void health()
 		rightWizHit = 1;
 		endx2 = 420;
 		textAlign(CENTER);
-		fill(0);
+		fill(255);
 		textSize(40);
 		text("Hit!",400,200);
 	}
