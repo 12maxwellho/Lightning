@@ -21,7 +21,8 @@ int leftWizHit = 1;
 int rightWizHit = 1;
 
 int x = 401;
-int y = 400;
+
+int targetX = 0;
 
 void setup()
 {
@@ -31,17 +32,30 @@ void setup()
 }
 void draw()
 {
+	background(100,149,237);
+	target();
 	leftWiz();
 	rightWiz();
-	if (mousePressed && (mouseButton==LEFT))
+	if (mousePressed && (mouseButton==LEFT) && (x>235) && (x<265))
 	{
+		accLeftWizBolt();
+		textAlign(CENTER);
+		fill(0);
+		textSize(40);
+		text("Nice!",250,350);
+	} else if (mousePressed && (mouseButton==LEFT)) {
 		leftWizBolt();
-	}
-	if (mousePressed && (mouseButton==RIGHT))
-	{
+	} else if (mousePressed && (mouseButton==RIGHT) && (x>235) && (x<265)) {
+		accRightWizBolt();
+		textAlign(CENTER);
+		fill(0);
+		textSize(40);
+		text("Nice!",250,350);
+	} else if (mousePressed && (mouseButton==RIGHT)) {
 		rightWizBolt();
 	}
 	health();
+	targetSlide();
 	gameOver();
 }
 void leftWiz()
@@ -76,6 +90,30 @@ void rightWizBolt()
 	{
 		endx2 = startx2 - (int)(Math.random()*10);
 		endy2 = starty2 + (int)((Math.random()*31)-15);
+		line(startx2,starty2,endx2,endy2);
+		startx2=endx2;
+		starty2=endy2;
+	}
+}
+void accLeftWizBolt()
+{
+	stroke(red1,green1,blue1);
+	while(endx1<500)
+	{
+		endx1 = startx1 + (int)(Math.random()*10);
+		endy1 = starty1 + (int)((Math.random()*17)-8);
+		line(startx1,starty1,endx1,endy1);
+		startx1=endx1;
+		starty1=endy1;
+	}
+}
+void accRightWizBolt()
+{
+	stroke(red2,green2,blue2);
+	while(endx2>0)
+	{
+		endx2 = startx2 - (int)(Math.random()*10);
+		endy2 = starty2 + (int)((Math.random()*17)-8);
 		line(startx2,starty2,endx2,endy2);
 		startx2=endx2;
 		starty2=endy2;
@@ -131,13 +169,47 @@ void health()
 		health1 = health1 - 1;
 		leftWizHit = 1;
 		endx1 = 80;
+		textAlign(CENTER);
+		fill(0);
+		textSize(40);
+		text("Hit!",100,200);
 	}
 	if(rightWizHit==0)
 	{
 		health2 = health2 - 1;
 		rightWizHit = 1;
 		endx2 = 420;
+		textAlign(CENTER);
+		fill(0);
+		textSize(40);
+		text("Hit!",400,200);
 	}
+}
+void target()
+{
+	fill(255);
+	stroke(0);
+	rect(x,400,7,50);
+	if(x>400)
+	{
+		targetX = 0;
+	}
+	if(x<100)
+	{
+		targetX = 1;
+	}
+	if(targetX == 0)
+	{
+		x = x-8;
+	} else {
+		x = x+8;
+	}
+}
+void targetSlide()
+{
+	fill(50,205,50);
+	stroke(50,205,50);
+	rect(235,400,30,50);
 }
 void gameOver()
 {
@@ -163,5 +235,4 @@ void gameOver()
 void mouseReleased()
 {
 	background(100,149,237);
-
 }
